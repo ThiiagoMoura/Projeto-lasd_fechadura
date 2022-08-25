@@ -1,0 +1,18 @@
+module divClock(input clk_in, output clk_out);
+
+reg [24:0] contador;
+initial begin
+	contador = 0;
+end
+
+always @(posedge clk_in)begin
+
+	if(contador == 25'b1011111010111100001000000)begin
+		clk_out <= !clk_out;
+		contador == 25'b0;
+	end
+	else
+		contador <= contador + 1;
+end
+
+endmodule

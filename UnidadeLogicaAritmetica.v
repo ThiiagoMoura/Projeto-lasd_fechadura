@@ -1,0 +1,36 @@
+module ULA (scra, scrb, ula_control, ula_result, flagz);
+
+///////////////////////////////
+input [7:0] scra, scrb;
+input [2:0] ula_control;
+
+output reg flagz;
+output reg [7:0] ula_result;
+
+///////////////////////////////
+
+
+always @(*)begin
+
+	case(ula_control)
+		3'b000: ula_result = scra & scrb;
+		3'b001: ula_result = scra | scrb; //
+		3'b010: ula_result = scra + scrb; //add//addi
+		3'b110: ula_result = scra + (~scrb) + 1;
+		3'b111: ula_result = ((scra < scrb)?1:0);
+		
+		
+	endcase
+	
+	if(ula_result == 0)begin
+		flagz = 1;
+	
+	end
+	else begin
+		flagz = 0;
+		
+	end
+
+end
+
+endmodule
